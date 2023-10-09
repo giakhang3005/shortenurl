@@ -14,7 +14,8 @@ function App() {
         { display: "flex" },
         { justifyContent: "center" },
         { alignItems: "center" },
-        { height: "100vh" }
+        { height: "100vh" },
+        {width: "100%"},
       )}
     >
       <ConfigProvider theme={{ token: { colorPrimary: "#518bb2" } }}>

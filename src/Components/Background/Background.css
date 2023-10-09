@@ -181,6 +181,7 @@
     position: absolute;
     bottom: 0;
     left: 50%;
+    transform: translateX(-50%);
     color: white;
 }
 .infoBtn {
@@ -194,5 +195,6 @@
 .viewBtn {
     position: absolute;
     bottom: 38px;
-    left: 48.3%;
+    left: 50%;
+    transform: translateX(-50%)
 }

@@ -1,13 +1,18 @@
 .InputUrl {
     text-align: center;
-    transform: translateY(-7vh)
+    transform: translateY(-7vh);
 }
 
 .InputUrl .InputTitle {
     color: white
 }
 .InputUrl .UrlInputBox {
-    width: 380px;
+    width: 320px;
     line-height: 27px;
     margin: 0 0 10px 0;
+}
+@media only screen and (max-width: 400px) {
+    .InputUrl .UrlInputBox {
+        width: 250px;
+    }
 }
