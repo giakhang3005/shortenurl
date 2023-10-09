@@ -15,7 +15,8 @@ function App() {
         { justifyContent: "center" },
         { alignItems: "center" },
         { height: "100vh" },
-        {width: "100%"},
+        {width: "100wh"},
+        {overFlow: 'scroll'}
       )}
     >
       <ConfigProvider theme={{ token: { colorPrimary: "#518bb2" } }}>

@@ -11,6 +11,13 @@
     line-height: 30px;
     margin: 0 0 10px 0;
 }
+.qrDownload {
+    cursor: pointer;
+    transition: all 0.1s linear;
+}
+.qrDownload:hover {
+   rotate: 3deg;
+}
 @media only screen and (max-width: 400px) {
     .InputUrl .UrlInputBox {
         width: 250px;

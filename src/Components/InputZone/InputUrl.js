@@ -112,6 +112,23 @@ export function InputUrl() {
     }
   };
 
+  //download qr
+  const downloadQrCode = () => {
+    const SelectedInput = document.querySelectorAll(".ant-input");
+    const userInputPath = SelectedInput[1].value;
+
+    //get canvas
+    const qr = document.querySelector("canvas");
+    const qrCodeUrl = qr.toDataURL();
+
+    const a = document.createElement("a");
+
+    a.download = `QR_${userInputPath}.png`;
+    a.href = qrCodeUrl;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
 
   return (
     <div className="InputUrl">
@@ -196,13 +213,16 @@ export function InputUrl() {
         >
           {/* QR Code */}
           <Popover content="Click to download">
-            <QRCode
-              size={100}
-              bordered
-              style={Object.assign({ margin: "0 7px 0 0" })}
-              type="canvas"
-              value={shortenUrl}
-            />
+            <a onClick={downloadQrCode} className="qrDownload">
+              <QRCode
+                className="qrcode"
+                size={100}
+                bordered
+                style={Object.assign({ margin: "0 7px 0 0" })}
+                type="canvas"
+                value={shortenUrl}
+              />
+            </a>
           </Popover>
 
           {/* Link */}
