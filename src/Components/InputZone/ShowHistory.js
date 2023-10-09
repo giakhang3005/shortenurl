@@ -40,13 +40,14 @@ export function ShowHistory() {
   const userHistory = JSON.parse(localStorage.getItem("userHistory"));
 
   return (
-    <div className="InputUrl">
+    <div className="InputUrl" style={Object.assign({width: '100%'}, {margin: '0 20px 0 20px'})}>
       <Title className="InputTitle">HISTORY</Title>
       <Table
+        style={{width: '100%'}}
         columns={columns}
         dataSource={userHistory}
-        // loading={isLoading}
         rowKey="id"
+        
       ></Table>
     </div>
   );

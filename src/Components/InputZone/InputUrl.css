@@ -8,7 +8,7 @@
 }
 .InputUrl .UrlInputBox {
     width: 320px;
-    line-height: 27px;
+    line-height: 30px;
     margin: 0 0 10px 0;
 }
 @media only screen and (max-width: 400px) {

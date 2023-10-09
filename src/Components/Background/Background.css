@@ -20,7 +20,7 @@
     margin: 0;
     padding: 0;
     background: #74a7fe;
-    overflow: hidden;
+    overflow: scroll;
     z-index: -1;
 }
 .background li {
@@ -198,3 +198,4 @@
     left: 50%;
     transform: translateX(-50%)
 }
+
