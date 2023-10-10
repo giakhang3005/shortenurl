@@ -5,10 +5,12 @@ import {
   FacebookFilled,
   MailFilled,
   HistoryOutlined,
-  CodeOutlined
+  CodeOutlined,
 } from "@ant-design/icons";
+import { useLocation } from "react-router-dom";
 
 export function Background(props) {
+  const location = useLocation();
   const setView = props.setView,
     view = props.view;
 
@@ -37,12 +39,26 @@ export function Background(props) {
         <li></li>
       </ul>
 
-      {view === "viewHistory" ? (
-        <Button className="viewBtn" icon={<CodeOutlined/>} type="primary" size="small" onClick={() => setView("")}>
+      {location.pathname === "/nonexist" ? (
+        <></>
+      ) : view === "viewHistory" ? (
+        <Button
+          className="viewBtn"
+          icon={<CodeOutlined />}
+          type="primary"
+          size="small"
+          onClick={() => setView("")}
+        >
           Shorten Url
         </Button>
       ) : (
-        <Button className="viewBtn" icon={<HistoryOutlined />} type="primary" size="small" onClick={() => setView("viewHistory")}>
+        <Button
+          className="viewBtn"
+          icon={<HistoryOutlined />}
+          type="primary"
+          size="small"
+          onClick={() => setView("viewHistory")}
+        >
           View History
         </Button>
       )}
