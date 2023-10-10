@@ -4,7 +4,7 @@ import { ShowHistory } from "./Components/InputZone/ShowHistory";
 import { ConfigProvider } from "antd";
 import { useState } from "react";
 import {NonExist} from "./Components/InputZone/NonExist"
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   const [view, setView] = useState("");
@@ -40,7 +40,7 @@ function App() {
       )}
     >
       <ConfigProvider theme={{ token: { colorPrimary: "#518bb2" } }}>
-        <BrowserRouter>
+        <HashRouter>
           <Routes>
             <Route path="nonexist" element={<NonExist />}/>
             <Route
@@ -49,7 +49,7 @@ function App() {
             />
           </Routes>
           <Background setView={setView} view={view} />
-        </BrowserRouter>
+        </HashRouter>
       </ConfigProvider>
     </div>
   );
