@@ -20,6 +20,7 @@ export function InputUrl() {
   const [shortenUrl, setShortenUrl] = useState("");
   const [loading, setLoading] = useState(false);
 
+  //check if input is a url
   const checkUrl = (string) => {
     try {
       return Boolean(new URL(string));
@@ -124,8 +125,8 @@ export function InputUrl() {
 
   //download qr
   const downloadQrCode = () => {
-    const SelectedInput = document.querySelectorAll(".ant-input");
-    const userInputPath = SelectedInput[1].value;
+    //split shorten url into 4 parts
+    const shortUrl = shortenUrl.split("/")
 
     //get canvas
     const qr = document.querySelector("canvas");
@@ -133,7 +134,8 @@ export function InputUrl() {
 
     const a = document.createElement("a");
 
-    a.download = `QR_${userInputPath}.png`;
+    //set name for download
+    a.download = `QR_${shortUrl[3]}.png`;
     a.href = qrCodeUrl;
     document.body.appendChild(a);
     a.click();
