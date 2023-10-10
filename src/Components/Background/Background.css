@@ -183,6 +183,7 @@
     left: 50%;
     transform: translateX(-50%);
     color: white;
+    min-width: 220px;
 }
 .infoBtn {
     /* background: transparent */
