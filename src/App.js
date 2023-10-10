@@ -4,7 +4,7 @@ import { ShowHistory } from "./Components/InputZone/ShowHistory";
 import { ConfigProvider } from "antd";
 import { useState } from "react";
 import {NonExist} from "./Components/InputZone/NonExist"
-import { HashRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   const [view, setView] = useState("");
@@ -40,16 +40,18 @@ function App() {
       )}
     >
       <ConfigProvider theme={{ token: { colorPrimary: "#518bb2" } }}>
-        <HashRouter>
+
+        <BrowserRouter>
           <Routes>
-            <Route path="nonexist" element={<NonExist />}/>
+            <Route path="/nonexist" element={<NonExist />}/>
             <Route
               path="/*"
               element={view === "viewHistory" ? <ShowHistory /> : <InputUrl />}
             />
           </Routes>
           <Background setView={setView} view={view} />
-        </HashRouter>
+        </BrowserRouter>
+
       </ConfigProvider>
     </div>
   );
