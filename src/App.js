@@ -6,7 +6,25 @@ import { useState } from "react";
 
 function App() {
   const [view, setView] = useState("");
+  const [titleState, setTitleState] = useState(true)
 
+  //change web title
+  const shortenUrlByGK = () => {
+    switch (titleState) {
+      case true: {
+        document.title = 'Shorten Url';
+        setTitleState(false)
+        break;
+      }
+      case false: {
+        document.title = 'By Gia Khang';
+        setTitleState(true)
+        break;
+      }
+    }
+  }
+
+  setInterval(() => shortenUrlByGK(), 1600)
   return (
     <div
       className="App"
