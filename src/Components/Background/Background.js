@@ -1,6 +1,6 @@
 import React from "react";
 import "./Background.css";
-import { Button } from "antd";
+import { Button, Typography } from "antd";
 import {
   FacebookFilled,
   MailFilled,
@@ -10,6 +10,7 @@ import {
 import { useLocation } from "react-router-dom";
 
 export function Background(props) {
+  const {Text} = Typography;
   const location = useLocation();
   const setView = props.setView,
     view = props.view;
@@ -62,8 +63,8 @@ export function Background(props) {
           View History
         </Button>
       )}
-
       <div className="info">
+      <Text style={Object.assign({color: 'white'})}>Powered by Gia Khang</Text>
         <a href="https://www.facebook.com/danny.neee" target="_blank">
           <Button
             className="infoBtn"
