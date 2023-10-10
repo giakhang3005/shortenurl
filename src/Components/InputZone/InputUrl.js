@@ -12,135 +12,15 @@ import {
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { CopyOutlined } from "@ant-design/icons";
 import "./InputUrl.css";
-//https://app.short.io/users/dashboard/878845/links
+import { useGenerateUrl } from "../../Hooks/HooksController";
+import { GenerateShortenLink } from "./GeneratedShortenLink";
+import {DownloadQR} from "./DownloadQR";
 
 export function InputUrl() {
   const { Title, Text } = Typography;
 
-  const [shortenUrl, setShortenUrl] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  //check if input is a url
-  const checkUrl = (string) => {
-    try {
-      return Boolean(new URL(string));
-    } catch (e) {
-      return false;
-    }
-  };
-
-  //generate link
-  const generateShortenLink = () => {
-    //get input url & path
-    const SelectedInput = document.querySelectorAll(".ant-input");
-    const userInputUrl = SelectedInput[0].value;
-    const userInputPath = SelectedInput[1].value;
-
-    //generate URL
-    const handleGenerateUrl = (data) => {
-      //Notice if user not input a url
-      if (checkUrl(userInputUrl) === false) {
-        message.error("You must enter a url to shorten");
-        setShortenUrl("");
-      } else {
-        //start fetching
-        setLoading(true);
-        fetch("https://api.short.io/links/public", {
-          method: "post",
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/json",
-            authorization: "pk_cYj2a160rvwjosKP",
-          },
-          body: JSON.stringify(data),
-        })
-          .then(function (response) {
-            return response.json();
-          })
-          .then(function (data) {
-            //check for errors
-            if (data.success === false) {
-              setLoading(false);
-              setShortenUrl("");
-              message.error(
-                "Path aldready exist, please change to a new one or leave it empty for a random path"
-              );
-            } else {
-              //success
-              setLoading(false);
-              message.success("Generate shorten Url successfully");
-
-              //return to users
-              setShortenUrl(data.shortURL);
-
-              //save to localStorage
-              const userHistory = JSON.parse(
-                localStorage.getItem("userHistory")
-              );
-              //save to localStorage
-              if (userHistory === null || userHistory === undefined) {
-                localStorage.setItem(
-                  "userHistory",
-                  JSON.stringify([{ long: userInputUrl, short: data.shortURL }])
-                );
-              } else {
-                localStorage.setItem(
-                  "userHistory",
-                  JSON.stringify([
-                    ...userHistory,
-                    { long: userInputUrl, short: data.shortURL },
-                  ])
-                );
-              }
-            }
-          })
-          .catch((err) => {});
-      }
-    };
-
-    //check if user is using path or not
-    //not using path
-    if (userInputPath.length === 0) {
-      let data = {
-        domain: "shorten.giakhang3005.com",
-        originalURL: userInputUrl,
-        allowDuplicates: false,
-      };
-      //success
-      handleGenerateUrl(data);
-      //using path, check for length
-    } else if (userInputPath.length >= 5 && userInputPath.length <= 15) {
-      let data = {
-        domain: "shorten.giakhang3005.com",
-        originalURL: userInputUrl,
-        allowDuplicates: false,
-        path: userInputPath,
-      };
-      //success
-      handleGenerateUrl(data);
-    } else {
-      message.error("Path must between 5 and 15 characters");
-    }
-  };
-
-  //download qr
-  const downloadQrCode = () => {
-    //split shorten url into 4 parts
-    const shortUrl = shortenUrl.split("/")
-
-    //get canvas
-    const qr = document.querySelector("canvas");
-    const qrCodeUrl = qr.toDataURL();
-
-    const a = document.createElement("a");
-
-    //set name for download
-    a.download = `QR_${shortUrl[3]}.png`;
-    a.href = qrCodeUrl;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
+  //decare hooks
+  const { shortenUrl, loading, generateUrl } = useGenerateUrl();
 
   return (
     <div className="InputUrl">
@@ -207,7 +87,7 @@ export function InputUrl() {
             { width: "100%" },
             { margin: "15px 5px 0 5px" }
           )}
-          onClick={generateShortenLink}
+          onClick={() => GenerateShortenLink(generateUrl)}
         >
           Shorten
         </Button>
@@ -225,7 +105,7 @@ export function InputUrl() {
         >
           {/* QR Code */}
           <Popover content="Click to download">
-            <a onClick={downloadQrCode} className="qrDownload">
+            <a onClick={() => DownloadQR(shortenUrl)} className="qrDownload">
               <QRCode
                 className="qrcode"
                 size={100}
