@@ -1,8 +1,8 @@
 import { React, useState } from "react";
-import { Typography, Table, message, Popover, Button, Popconfirm } from "antd";
+import { Typography, Table, message, Popover, Button, Popconfirm, QRCode } from "antd";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { CopyOutlined, DeleteOutlined } from "@ant-design/icons";
-import QRCode from "react-qr-code";
+// import QRCode from "react-qr-code";
 
 export function ShowHistory() {
   const { Title, Text } = Typography;
@@ -19,12 +19,32 @@ export function ShowHistory() {
     message.success("Cleared your history");
   };
 
+  const getPath = (url) => {
+    const splitUrl = url.split("/")
+
+    return splitUrl[3];
+  }
+
+  //download qrcode
+  const downloadQrCode = (path) => {
+    //get canvas
+    const qr = document.querySelector(`.qr_${path} canvas`)
+    const qrCodeUrl = qr.toDataURL();
+
+    const a = document.createElement("a");
+
+    //set name for download
+    a.download = `QR_${path}.png`;
+    a.href = qrCodeUrl;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
   //columns
   const columns = [
     {
       key: "1",
       title: "Original Url",
-      //location.id
       dataIndex: "long",
     },
     {
@@ -65,7 +85,19 @@ export function ShowHistory() {
         return (
           <>
             {/* QR Code */}
-            <QRCode style={Object.assign({width: '60px'}, {height: '60px'}, {margin: 0})} value={url.short} />
+            {/* <QRCode id="qr" style={Object.assign({width: '60px'}, {height: '60px'}, {margin: 0})} value={url.short} /> */}
+            <Popover content="Click to download">
+            <a onClick={() => downloadQrCode(getPath(url.short))} className="qrDownload">
+              <QRCode
+                className={`qr_${getPath(url.short)}`}
+                size={68}
+                bordered
+                style={Object.assign({ margin: "0 7px 0 0" })}
+                type="canvas"
+                value={url.short}
+              />
+            </a>
+          </Popover>
           </>
         );
       },
