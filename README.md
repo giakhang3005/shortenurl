@@ -14,3 +14,4 @@
 Your url is too long to send for someone? This is a responsive website to solve your problem, it help you to shorten your url, custom path, QR Code and store your history in your browser, you can get your old url at any time
 
 
+![Uploading Ảnh chụp Màn hình 2023-11-19 lúc 22.23.02.png…]()
