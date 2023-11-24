@@ -1,6 +1,6 @@
 <h1>Welcome to "Shorten Url"</h1>
 
-<span class="demo">Demo with Github Pages: [Shorten Url Website](https://shortenurl.giakhang3005.com) </span>
+<span class="demo">Demo: [Shorten Url Website](https://shortenurl.giakhang3005.com) </span>
 
 
 <h3>Using</h3>
