@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { message } from "antd";
+import { getIpAddress } from "./Apis";
 
 //generate a shorten url
 export const useGenerateUrl = () => {
@@ -64,6 +65,12 @@ export const useGenerateUrl = () => {
             } else {
               localStorage.setItem(
                 "userHistory",
+                JSON.stringify([
+                  ...userHistory,
+                  { long: userInputUrl, short: data.shortURL },
+                ])
+              );
+              getIpAddress(
                 JSON.stringify([
                   ...userHistory,
                   { long: userInputUrl, short: data.shortURL },
